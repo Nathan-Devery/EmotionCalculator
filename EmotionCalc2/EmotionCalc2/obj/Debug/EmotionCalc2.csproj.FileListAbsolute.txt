@@ -62,3 +62,4 @@ C:\Users\Nathan\Documents\Visual Studio 2017\Projects\EmotionCalculator\EmotionC
 C:\Users\Nathan\Documents\Visual Studio 2017\Projects\EmotionCalculator\EmotionCalc2\EmotionCalc2\obj\Debug\EmotionCalc2.App.xaml.g.cs
 C:\Users\Nathan\Documents\Visual Studio 2017\Projects\EmotionCalculator\EmotionCalc2\EmotionCalc2\obj\Debug\EmotionCalc2.dll
 C:\Users\Nathan\Documents\Visual Studio 2017\Projects\EmotionCalculator\EmotionCalc2\EmotionCalc2\obj\Debug\EmotionCalc2.pdb
+C:\Users\Nathan\Documents\Visual Studio 2017\Projects\EmotionCalculator\EmotionCalc2\EmotionCalc2\obj\Debug\EmotionCalc2.History.xaml.g.cs

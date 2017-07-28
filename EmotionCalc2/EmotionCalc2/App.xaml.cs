@@ -14,7 +14,8 @@ namespace EmotionCalc2
             InitializeComponent();
 
             //MainPage = new EmotionCalc2.MainPage();
-            MainPage = new EmotionCalc2.QuestionPage();
+            //MainPage = new EmotionCalc2.QuestionPage();
+            MainPage = new EmotionCalc2.History();
         }
 
         protected override void OnStart()

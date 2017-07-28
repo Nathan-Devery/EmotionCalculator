@@ -49,7 +49,6 @@ namespace EmotionCalc2
                 }
 
                 infoLabel.Text = catInfo;
-                
             }
 
         }
