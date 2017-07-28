@@ -105,12 +105,8 @@ namespace EmotionCalc2
 
                 emotionLabel.Text = toDisplay;
 
-
             }
 
         }
-
-
-        
     }
 }

@@ -38,9 +38,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AzureManager.cs" />
+    <Compile Include="DatabaseConnecter.cs" />
     <Compile Include="MainPage.cs" />
+    <Compile Include="Model\Cat.cs" />
     <Compile Include="Model\FaceModel.cs" />
+    <Compile Include="Model\NotHotDogModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
