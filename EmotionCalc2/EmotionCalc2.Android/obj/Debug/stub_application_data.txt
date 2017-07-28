@@ -1,0 +1,2 @@
+android.app.Application
+EmotionCalc2.Android
