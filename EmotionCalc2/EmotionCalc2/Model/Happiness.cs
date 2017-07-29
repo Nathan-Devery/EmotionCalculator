@@ -12,6 +12,6 @@ namespace EmotionCalc2.Model
         public DateTime createdAt { get; set; }
 
         [JsonProperty(PropertyName = "happinesslevel")]
-        public int happinesslevel { get; set; }
+        public double happinesslevel { get; set; }
     }
 }

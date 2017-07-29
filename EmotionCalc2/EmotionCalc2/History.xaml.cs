@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EmotionCalc2.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Collections.ObjectModel;
 
 namespace EmotionCalc2
 {
@@ -14,6 +15,7 @@ namespace EmotionCalc2
     {
         public History()
         {
+            Title = "History";
             InitializeComponent();
             displayData();
         }
@@ -23,13 +25,25 @@ namespace EmotionCalc2
             DatabaseConnecter<Happiness> connecter = new DatabaseConnecter<Happiness>("https://emotioncalc.azurewebsites.net/");
             List<Happiness> happinessHistory = await connecter.GetTableInformation();
 
+
+            ObservableCollection<Happiness> happinessList = new ObservableCollection<Happiness>();
+            foreach (Happiness hap in happinessHistory)
+            {
+                happinessList.Add(hap);
+                //rows.Add(hap.createdAt + " Happiness Level: " + hap.happinesslevel);
+            }
+
+
+            /*
             List<String> rows = new List<String>();
             foreach(Happiness hap in happinessHistory)
             {
                 rows.Add(hap.createdAt + " Happiness Level: " + hap.happinesslevel);
             }
+            */
+
             
-            emotionList.ItemsSource = rows;  
+           emotionList.ItemsSource = happinessList;  
         }
 
     }

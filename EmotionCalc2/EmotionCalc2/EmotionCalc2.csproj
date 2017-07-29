@@ -42,7 +42,7 @@
     <Compile Include="History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.cs" />
+    <Compile Include="Submit.cs" />
     <Compile Include="Model\Cat.cs" />
     <Compile Include="Model\FaceModel.cs" />
     <Compile Include="Model\Happiness.cs" />

@@ -4,9 +4,12 @@
     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="History" FontSize="Large"></Label>
-            <ListView x:Name="emotionList" HasUnevenRows="True">
-                
+            <ListView x:Name="emotionList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding happinesslevel}" Detail="{Binding createdAt}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </ContentPage.Content>

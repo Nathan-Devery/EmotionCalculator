@@ -14,27 +14,36 @@ using EmotionCalc2.Model;
 
 namespace EmotionCalc2
 {
-    public class MainPage : ContentPage
+    public class Submit : ContentPage
     {
         Label emotionLabel = new Label();
         Image image = new Image();
+        StackLayout stack;
+        Entry tag = new Entry();
+        Button photoButton;
 
-        public MainPage()
+        double unpostedHappiness = 0;
+
+        public Submit()
         {
-            Button photoButton = new Button
+            Title = "Log Happiness";
+
+            photoButton = new Button
             {
                 Text = "Take Photo and Analyze"
             };
             photoButton.Clicked += loadCamera;
 
-            Content = new StackLayout
+            stack = new StackLayout()
             {
                 Children = {
+                    image,
                     emotionLabel,
                     photoButton,
-                    image
                 }
             };
+
+            Content = stack;
         }
 
         private async void loadCamera(object sender, EventArgs e)
@@ -57,13 +66,31 @@ namespace EmotionCalc2
             if (file == null)
                 return;
 
+            stack.Children.RemoveAt(2);
+
             image.Source = ImageSource.FromStream(() =>
             {
                 return file.GetStream();
             });
 
-
             await JudgeEmotion(file);
+
+            //Photo taken, the following now changes the content to allow tagging & submission
+
+            stack.Children.Add(new Label()
+            {
+                Text = "Recent Activity Tag:"
+            });
+            stack.Children.Add(tag);
+
+            Button postBut = new Button()
+            {
+                Text = "Upload"
+            };
+            postBut.Clicked += postInfo;
+
+            stack.Children.Add(postBut);
+            
         }
 
         static byte[] GetImageAsByteArray(MediaFile file)
@@ -93,20 +120,52 @@ namespace EmotionCalc2
 
                 Emotion[] emotions = JsonConvert.DeserializeObject<Emotion[]>(responseContent);
 
-
                 String toDisplay = "";
                 foreach(Emotion emotion in emotions)
                 {
                     foreach (var item in emotion.scores)
                     {
-                        toDisplay += " " + item.Key + ":" + item.Value;
+                        if(item.Key.Equals("happiness")) {
+                            toDisplay += "happiness: " + item.Value;
+                            unpostedHappiness = item.Value;
+                        }
                     }
                 }
 
                 emotionLabel.Text = toDisplay;
-
             }
+        }
+
+        async void postInfo(object sender, EventArgs e)
+        {
+            DatabaseConnecter<Happiness> connecter = new DatabaseConnecter<Happiness>("https://emotioncalc.azurewebsites.net/");
+            await connecter.PostInformation(new Happiness
+            {
+                happinesslevel = unpostedHappiness
+            });
+
+            photoButton = new Button
+            {
+                Text = "Take Photo and Analyze"
+            };
+            photoButton.Clicked += loadCamera;
+
+            image = new Image();
+            emotionLabel.Text = "";
+
+            stack = new StackLayout()
+            {
+                Children = {
+                    image,
+                    emotionLabel,
+                    photoButton,
+                }
+            };
+
+            Content = stack;
 
         }
+
+       
     }
 }

@@ -13,9 +13,16 @@ namespace EmotionCalc2
         {
             InitializeComponent();
 
-            //MainPage = new EmotionCalc2.MainPage();
+            //MainPage = new EmotionCalc2.Submit();
             //MainPage = new EmotionCalc2.QuestionPage();
-            MainPage = new EmotionCalc2.History();
+            //MainPage = new EmotionCalc2.History();
+
+            TabbedPage tabPage = new TabbedPage();
+
+            tabPage.Children.Add(new Submit());
+            tabPage.Children.Add(new History());
+
+            MainPage = tabPage;
         }
 
         protected override void OnStart()
