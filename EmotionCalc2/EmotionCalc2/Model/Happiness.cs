@@ -13,5 +13,8 @@ namespace EmotionCalc2.Model
 
         [JsonProperty(PropertyName = "happinesslevel")]
         public double happinesslevel { get; set; }
+
+        [JsonProperty(PropertyName = "tag")]
+        public String tag { get; set; }
     }
 }

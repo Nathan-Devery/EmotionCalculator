@@ -43,7 +43,6 @@
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
     <Compile Include="Submit.cs" />
-    <Compile Include="Model\Cat.cs" />
     <Compile Include="Model\FaceModel.cs" />
     <Compile Include="Model\Happiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,13 +13,9 @@ namespace EmotionCalc2
         {
             InitializeComponent();
 
-            //MainPage = new EmotionCalc2.Submit();
-            //MainPage = new EmotionCalc2.QuestionPage();
-            //MainPage = new EmotionCalc2.History();
-
             TabbedPage tabPage = new TabbedPage();
-
             tabPage.Children.Add(new Submit());
+            tabPage.Children.Add(new QuestionPage());
             tabPage.Children.Add(new History());
 
             MainPage = tabPage;

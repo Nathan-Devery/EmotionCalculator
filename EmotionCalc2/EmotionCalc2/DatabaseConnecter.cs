@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
+using EmotionCalc2.Model;
 
 namespace EmotionCalc2
 {
@@ -30,6 +31,5 @@ namespace EmotionCalc2
         {
             await this.table.InsertAsync(model);
         }
-
     }
 }

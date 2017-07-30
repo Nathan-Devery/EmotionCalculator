@@ -16,7 +16,29 @@ namespace EmotionCalc2
 {
     public class Submit : ContentPage
     {
-        Label emotionLabel = new Label();
+        Label emotionLabel = new Label()
+        {
+            HorizontalTextAlignment = TextAlignment.Center,
+            TextColor = Color.Green,
+            FontSize = 25,
+        };
+
+        Label heading = new Label
+        {
+            Text = "Log Happiness",
+            FontSize = 20,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
+        Label info = new Label
+        {
+            Text = "Log your emotion after an activity in Log tab. \n \n" +
+            "Find whether an activity makes you happy on average using the Activity tab \n \n" +
+            "See history Happiness in History Tab",
+            HorizontalOptions = LayoutOptions.Center,
+            Margin = 50
+        };
+
         Image image = new Image();
         StackLayout stack;
         Entry tag = new Entry();
@@ -26,23 +48,26 @@ namespace EmotionCalc2
 
         public Submit()
         {
-            Title = "Log Happiness";
+            Title = "Log";
 
             photoButton = new Button
             {
-                Text = "Take Photo and Analyze"
+                Text = "Take Photo"
             };
             photoButton.Clicked += loadCamera;
 
             stack = new StackLayout()
             {
+                Margin = 20,
+                Padding = 30,
                 Children = {
+                    heading,
                     image,
                     emotionLabel,
                     photoButton,
+                    info
                 }
             };
-
             Content = stack;
         }
 
@@ -66,6 +91,8 @@ namespace EmotionCalc2
             if (file == null)
                 return;
 
+            stack.Children.Remove(heading);
+            stack.Children.Remove(info);
             stack.Children.RemoveAt(2);
 
             image.Source = ImageSource.FromStream(() =>
@@ -90,7 +117,6 @@ namespace EmotionCalc2
             postBut.Clicked += postInfo;
 
             stack.Children.Add(postBut);
-            
         }
 
         static byte[] GetImageAsByteArray(MediaFile file)
@@ -126,7 +152,15 @@ namespace EmotionCalc2
                     foreach (var item in emotion.scores)
                     {
                         if(item.Key.Equals("happiness")) {
-                            toDisplay += "happiness: " + item.Value;
+                            if (item.Value > 0.5)
+                            {
+                                emotionLabel.TextColor = Color.Green;
+                            }
+                            else
+                            {
+                                emotionLabel.TextColor = Color.Red;
+                            }
+                            toDisplay += "Happiness: " + item.Value;
                             unpostedHappiness = item.Value;
                         }
                     }
@@ -138,10 +172,12 @@ namespace EmotionCalc2
 
         async void postInfo(object sender, EventArgs e)
         {
+
             DatabaseConnecter<Happiness> connecter = new DatabaseConnecter<Happiness>("https://emotioncalc.azurewebsites.net/");
             await connecter.PostInformation(new Happiness
             {
-                happinesslevel = unpostedHappiness
+                happinesslevel = unpostedHappiness,
+                tag = this.tag.Text
             });
 
             photoButton = new Button
@@ -155,17 +191,18 @@ namespace EmotionCalc2
 
             stack = new StackLayout()
             {
+                Margin = 20,
+                Padding = 20,
                 Children = {
+                    heading,
                     image,
                     emotionLabel,
                     photoButton,
+                    info
                 }
             };
 
             Content = stack;
-
         }
-
-       
     }
 }
